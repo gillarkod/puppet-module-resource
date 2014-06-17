@@ -103,3 +103,24 @@ exec_hiera_merge
 Merge execs in hiera
 
 - *Default*: false
+
+service
+-------
+Hash of services
+
+- *Default*: undef
+
+- *Hiera example*:
+<pre>
+resource::service:
+  'disable service':
+    name: 'example'
+    ensure: 'stopped'
+    enable: 'false'
+</pre>
+
+service_hiera_merge
+-------------------
+Merge services in hiera
+
+- *Default*: false
