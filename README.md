@@ -26,7 +26,7 @@ Hash of files
 
 - *Hiera example*:
 <pre>
-file::file:
+resource::file:
   'example file':
     path: '/usr/local/bin/do_stuff'
     owner: root
@@ -40,4 +40,66 @@ Merge files in hiera
 
 - *Default*: false
 
+mount
+-----
+Hash of mounts
 
+- *Default*: undef
+
+- *Hiera example*:
+<pre>
+resource::mount:
+  '/opt/files':
+    ensure: mounted
+    atboot: true
+    device: 'fileserver:/exports/files'
+    fstype: 'nfs'
+    options: 'defaults'
+</pre>
+
+mount_hiera_merge
+-----------------
+Merge mounts in hiera
+
+- *Default*: false
+
+cron
+----
+Hash of cronjobs
+
+- *Default*: undef
+
+- *Hiera example*:
+<pre>
+resource::cron:
+  'do_stuff':
+    command: '/usr/local/bin/do_stuff'
+    hour: '23'
+    user: 'root'
+</pre>
+
+cron_hiera_merge
+----------------
+Merge cronjobs in hiera
+
+- *Default*: false
+
+exec
+----
+Hash of execs
+
+- *Default*: undef
+
+- *Hiera example*:
+<pre>
+resource::exec:
+  'say hello':
+    command: 'wall hello'
+    path: '/usr/bin'
+</pre>
+
+exec_hiera_merge
+----------------
+Merge execs in hiera
+
+- *Default*: false
