@@ -47,7 +47,14 @@ describe 'resource' do
               'command'     => 'example',
               'path'        => '/usr/local/bin',
             }
-          }
+          },
+          :service => {
+            'example svc'   => {
+              'name'        => 'example',
+              'ensure'      => 'stopped',
+              'enable'      => 'false',
+            }
+          },
         }
       end
 
@@ -77,6 +84,13 @@ describe 'resource' do
         'command' => 'example',
         'path'    => '/usr/local/bin',
       })}
+
+      it { should contain_service('example svc').with({
+        'name'    => 'example',
+        'ensure'  => 'stopped',
+        'enable'  => 'false',
+      })}
+
     end
 end
 

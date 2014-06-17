@@ -11,6 +11,8 @@ class resource (
   $cron_hiera_merge = false,
   $exec = undef,
   $exec_hiera_merge = false,
+  $service = undef,
+  $service_hiera_merge = false,
 ) {
   if $file {
     if type($file_hiera_merge) == 'string' {
@@ -74,5 +76,21 @@ class resource (
     }
     validate_hash($exec_real)
     create_resources(exec,$exec_real)
+  }
+
+  if $service {
+    if type($service_hiera_merge) == 'string' {
+      $service_hiera_merge_real = str2bool($service_hiera_merge)
+    } else {
+      $service_hiera_merge_real = $service_hiera_merge
+    }
+    validate_bool($service_hiera_merge_real)
+    if $service_hiera_merge_real == true {
+      $service_real = hiera_hash('resource::service')
+    } else {
+      $service_real = $service
+    }
+    validate_hash($service_real)
+    create_resources(service,$service_real)
   }
 }
