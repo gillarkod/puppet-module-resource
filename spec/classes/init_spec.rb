@@ -55,6 +55,12 @@ describe 'resource' do
               'enable'      => 'false',
             }
           },
+          :package => {
+            'example package'   => {
+              'name'        => 'example',
+              'ensure'      => 'latest',
+            }
+          },
         }
       end
 
@@ -89,6 +95,11 @@ describe 'resource' do
         'name'    => 'example',
         'ensure'  => 'stopped',
         'enable'  => 'false',
+      })}
+
+      it { should contain_package('example package').with({
+        'name'    => 'example',
+        'ensure'  => 'latest',
       })}
 
     end

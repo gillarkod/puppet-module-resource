@@ -13,6 +13,8 @@ class resource (
   $exec_hiera_merge = false,
   $service = undef,
   $service_hiera_merge = false,
+  $package = undef,
+  $package_hiera_merge = false,
 ) {
   if $file {
     if type($file_hiera_merge) == 'string' {
@@ -92,5 +94,21 @@ class resource (
     }
     validate_hash($service_real)
     create_resources(service,$service_real)
+  }
+
+  if $package {
+    if type($package_hiera_merge) == 'string' {
+      $package_hiera_merge_real = str2bool($package_hiera_merge)
+    } else {
+      $package_hiera_merge_real = $package_hiera_merge
+    }
+    validate_bool($package_hiera_merge_real)
+    if $package_hiera_merge_real == true {
+      $package_real = hiera_hash('resource::package')
+    } else {
+      $package_real = $package
+    }
+    validate_hash($package_real)
+    create_resources(package,$package_real)
   }
 }

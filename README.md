@@ -124,3 +124,23 @@ service_hiera_merge
 Merge services in hiera
 
 - *Default*: false
+
+package
+-------
+Hash of packages
+
+- *Default*: undef
+
+- *Hiera example*:
+<pre>
+resource::package:
+  'package':
+    name: 'example'
+    ensure: 'latest'
+</pre>
+
+package_hiera_merge
+-------------------
+Merge packages in hiera
+
+- *Default*: false
