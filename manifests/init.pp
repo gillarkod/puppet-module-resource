@@ -17,7 +17,7 @@ class resource (
   $package_hiera_merge = false,
 ) {
   if $file {
-    if type($file_hiera_merge) == 'string' {
+    if is_string($file_hiera_merge) {
       $file_hiera_merge_real = str2bool($file_hiera_merge)
     } else {
       $file_hiera_merge_real = $file_hiera_merge
@@ -33,7 +33,7 @@ class resource (
   }
 
   if $mount {
-    if type($mount_hiera_merge) == 'string' {
+    if is_string($mount_hiera_merge) {
       $mount_hiera_merge_real = str2bool($mount_hiera_merge)
     } else {
       $mount_hiera_merge_real = $mount_hiera_merge
@@ -49,7 +49,7 @@ class resource (
   }
 
   if $cron {
-    if type($cron_hiera_merge) == 'string' {
+    if is_string($cron_hiera_merge) {
       $cron_hiera_merge_real = str2bool($cron_hiera_merge)
     } else {
       $cron_hiera_merge_real = $cron_hiera_merge
@@ -65,7 +65,7 @@ class resource (
   }
 
   if $exec {
-    if type($exec_hiera_merge) == 'string' {
+    if is_string($exec_hiera_merge) {
       $exec_hiera_merge_real = str2bool($exec_hiera_merge)
     } else {
       $exec_hiera_merge_real = $exec_hiera_merge
@@ -81,7 +81,7 @@ class resource (
   }
 
   if $service {
-    if type($service_hiera_merge) == 'string' {
+    if is_string($service_hiera_merge) {
       $service_hiera_merge_real = str2bool($service_hiera_merge)
     } else {
       $service_hiera_merge_real = $service_hiera_merge
@@ -97,7 +97,7 @@ class resource (
   }
 
   if $package {
-    if type($package_hiera_merge) == 'string' {
+    if is_string($package_hiera_merge) {
       $package_hiera_merge_real = str2bool($package_hiera_merge)
     } else {
       $package_hiera_merge_real = $package_hiera_merge
