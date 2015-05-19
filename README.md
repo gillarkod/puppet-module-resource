@@ -144,3 +144,24 @@ package_hiera_merge
 Merge packages in hiera
 
 - *Default*: false
+
+file_line
+---------
+Hash of file_lines
+
+- *Default*: undef
+
+- *Hiera example*:
+<pre>
+resource::file_line:
+  'file_line':
+    path: '/etc/example-file'
+    line: 'exampleconf = true'
+    match: 'exampleconf = .*'
+</pre>
+
+file_line_hiera_merge
+-------------------
+Merge file_lines in hiera
+
+- *Default*: false

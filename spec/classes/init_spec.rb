@@ -56,9 +56,16 @@ describe 'resource' do
             }
           },
           :package => {
-            'example package'   => {
-              'name'        => 'example',
-              'ensure'      => 'latest',
+            'example package' => {
+              'name'          => 'example',
+              'ensure'        => 'latest',
+            }
+          },
+          :file_line => {
+            'example file_line' => {
+              'path'            => '/etc/example-file',
+              'line'            => 'exampleconf = true',
+              'match'           => 'exampleconf = .*',
             }
           },
         }
@@ -97,9 +104,10 @@ describe 'resource' do
         'enable'  => 'false',
       })}
 
-      it { should contain_package('example package').with({
-        'name'    => 'example',
-        'ensure'  => 'latest',
+      it { should contain_file_line('example file_line').with({
+        'path'  => '/etc/example-file',
+        'line'  => 'exampleconf = true',
+        'match' => 'exampleconf = .*',
       })}
 
     end

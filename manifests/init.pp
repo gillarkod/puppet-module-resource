@@ -3,18 +3,20 @@
 # Module to manage resources
 #
 class resource (
-  $file = undef,
-  $file_hiera_merge = false,
-  $mount = undef,
-  $mount_hiera_merge = false,
-  $cron = undef,
-  $cron_hiera_merge = false,
-  $exec = undef,
-  $exec_hiera_merge = false,
-  $service = undef,
-  $service_hiera_merge = false,
-  $package = undef,
-  $package_hiera_merge = false,
+  $file                  = undef,
+  $file_hiera_merge      = false,
+  $mount                 = undef,
+  $mount_hiera_merge     = false,
+  $cron                  = undef,
+  $cron_hiera_merge      = false,
+  $exec                  = undef,
+  $exec_hiera_merge      = false,
+  $service               = undef,
+  $service_hiera_merge   = false,
+  $package               = undef,
+  $package_hiera_merge   = false,
+  $file_line             = undef,
+  $file_line_hiera_merge = false,
 ) {
   if $file {
     if is_string($file_hiera_merge) {
@@ -110,5 +112,21 @@ class resource (
     }
     validate_hash($package_real)
     create_resources(package,$package_real)
+  }
+
+  if $file_line {
+    if is_string($file_line_hiera_merge) {
+      $file_line_hiera_merge_real = str2bool($file_line_hiera_merge)
+    } else {
+      $file_line_hiera_merge_real = $file_line_hiera_merge
+    }
+    validate_bool($file_line_hiera_merge_real)
+    if $file_line_hiera_merge_real == true {
+      $file_line_real = hiera_hash('resource::file_line')
+    } else {
+      $file_line_real = $file_line
+    }
+    validate_hash($file_line_real)
+    create_resources(file_line,$file_line_real)
   }
 }
